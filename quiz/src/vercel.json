@@ -6,7 +6,13 @@
             "use": "@vercel/node",
             "config": {
                 "includeFiles": [
-                    "database.json"
+                    "database.json",
+                    "api.js",
+                    "elements.js",
+                    "questions.js",
+                    "quiz.js",
+                    "results.js",
+                    "main.js"
                 ]
             }
         }
