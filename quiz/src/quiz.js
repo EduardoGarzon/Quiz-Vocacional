@@ -30,7 +30,11 @@ export async function loadQuestions(quizElement) {
         className: "finish-btn",
         onClick: async () => {
             const result = await calculateResults(questions, answers)
-            quizElement.innerHTML = `<div class="result"><h2>Seu resultado foi: ${result.name}!</h2><p>${result.description}</p></div>`
+            if (result == undefined) {
+                quizElement.innerHTML = `<div class="result"><h2>Indefinido</h2><p>Desculpe nao temos um resultado preciso para suas respostas.</p></div>`
+            } else {
+                quizElement.innerHTML = `<div class="result"><h2>Seu resultado foi: ${result.name}!</h2><p>${result.description}</p></div>`
+            }
         }
     })
 
@@ -63,8 +67,13 @@ async function calculateResults(questions, answers) {
         }
     }
 
-    const result = await findResult(winnerResult)
-    return result
+    if (winnerResult >= 1 && winnerResult <= 5) {
+        const result = await findResult(winnerResult)
+        return result
+    } else {
+        return undefined;
+    }
+
 }
 
 // answer = { questionId: 1, answer: "fullyDisagree" }
